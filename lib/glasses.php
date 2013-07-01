@@ -5,14 +5,17 @@ class Glasses {
 		':any' => '[0-9a-zA-Z~%\.:_\\-]+'
 	), $method = 'to';
 	public function set_method($method = 'to') {
-		$this->method = $method;
+		$this->method = (string) $method;
+	}
+	public function set_wildcards($wildcards = array()) {
+		$this->wildcards = (array) $wildcards;
 	}
 	public function rule($name, $test, $class) {
 		$name = strtolower($name);
 		$this->rules[$name] = compact('test', 'class');
 	}
 	public function parse($str) {
-		$str = trim($str);
+		$str = trim(strtolower($str));
 		$method = $this->method;
 		foreach ($this->rules as $r) {
 			if (($give = $this->_check($r, $str))) {
@@ -37,6 +40,7 @@ class Glasses {
 		foreach ($this->wildcards as $s => $r) { $search[] = $s; $replace[] = $r; }
 		$build = new stdClass;
 		$build->str = $str;
+		$build->test = $rule['test'];
 		$build->regex = '/' . str_replace($search, $replace, $rule['test']) . '/';
 		$build->matches = array();
 		if (preg_match_all($build->regex, $build->str, $matches)) {
