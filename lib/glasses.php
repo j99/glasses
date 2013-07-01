@@ -1,12 +1,11 @@
 <?php
 
 class Glasses {
-	protected $rules = array();
-	public $wildcards = array(
+	protected $rules = array(), $wildcards = array(
 		':any' => '[0-9a-zA-Z~%\.:_\\-]+'
-	);
-	public function __construct() {
-		
+	), $method = 'to';
+	public function set_method($method = 'to') {
+		$this->method = $method;
 	}
 	public function rule($name, $test, $class) {
 		$name = strtolower($name);
@@ -14,11 +13,12 @@ class Glasses {
 	}
 	public function parse($str) {
 		$str = trim($str);
-		$method = 'to';
+		$method = $this->method;
 		foreach ($this->rules as $r) {
 			if (($give = $this->_check($r, $str))) {
 				$u = null;
 				$class = '';
+
 				if (is_array($r['class'])) { $class = $r['class'][0]; $method = $r['class'][1]; }
 				else { $class = $r['class']; }
 

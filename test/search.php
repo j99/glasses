@@ -19,4 +19,9 @@ class Search {
 			print 'posts containing the hashtag "' . $m->name . '"' . PHP_EOL;
 		}
 	}
+	public function welcome($build) {
+		foreach ($build->matches as $m) {
+			print 'name -> ' . $m->name . ', text -> ' . $m->text . PHP_EOL;
+		}
+	}
 }
