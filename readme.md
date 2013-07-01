@@ -14,7 +14,7 @@ Usage is easy. There are three steps.
 2. Add rules.
 3. Parse
 
-```
+```php
 require 'vendor/Glasses/glasses.php';
 
 $parser = new Glasses();
@@ -28,7 +28,7 @@ Rules are the things that Glasses searches for in your text. They check against 
 
 The `->rule()` function takes three parameters.
 
-```
+```php
 function rule($name, $test, $class)
 
 (string) $name : The name of the rule.
@@ -39,7 +39,7 @@ function rule($name, $test, $class)
 ####Wildcards
 Wildcards can be used in the second argument of the `->rule()` function (the modified regex).
 
-```
+```php
 $parser->rule('username', '@(:any)', 'Users');
 ```
 The wildcard is the `(:any)` which is the only default wildcard. How wildcards work, is that they are replace by a regex.
@@ -59,7 +59,7 @@ What happens is instead of using `@(:any)` as the modified regex, it replaces `:
 
 To parse text, you must call the `->parse()` function. It accepts one argument, the text.
 
-```
+```php
 function parse($text)
 
 (string) $text : The text to parse
@@ -74,7 +74,7 @@ Once a match is found between a rule and text, it does one of two things: if the
 ---
 Example of option 1:
 
-```
+```php
 $parser->rule('welcome', 'hello world', 'Welcome');
 $parser->parse('hello world'); // Welcome->to();
 ```
@@ -82,7 +82,7 @@ $parser->parse('hello world'); // Welcome->to();
 ---
 Example of option 2:
 
-```
+```php
 $parser->rule('welcome', 'hello world', array('Messages', 'welcome'));
 $parser->parse('hello world'); // Messages->welcome();
 ```
@@ -91,7 +91,7 @@ When the method is called it passes one argument, the build (an object).
 
 Here is an example of a build:
 
-```
+```php
 stdClass Object
 (
     [str] => hello world
@@ -112,7 +112,7 @@ stdClass Object
 
 Here is another example with wildcards:
 
-```
+```php
 stdClass Object
 (
     [str] => @username
@@ -137,7 +137,7 @@ There are two configuration methods: `set_method`, and `set_wildcards`.
 
 ---
 
-```
+```php
 function set_method($method)
 
 (string) $method : The default method if there is not one provided.
@@ -147,7 +147,7 @@ The default method is `to`.
 
 ---
 
-```
+```php
 function set_wildcards($wildcards)
 
 (array) $wildcards : The array of wildcards used in parsing.
