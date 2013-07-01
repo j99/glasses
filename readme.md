@@ -28,7 +28,7 @@ Rules are the things that Glasses searches for in your text. They check against 
 
 The `->rule()` function takes three parameters.
 
-```php
+```
 function rule($name, $test, $class)
 
 (string) $name : The name of the rule.
@@ -59,7 +59,7 @@ What happens is instead of using `@(:any)` as the modified regex, it replaces `:
 
 To parse text, you must call the `->parse()` function. It accepts one argument, the text.
 
-```php
+```
 function parse($text)
 
 (string) $text : The text to parse
@@ -91,7 +91,7 @@ When the method is called it passes one argument, the build (an object).
 
 Here is an example of a build:
 
-```php
+```
 stdClass Object
 (
     [str] => hello world
@@ -112,7 +112,7 @@ stdClass Object
 
 Here is another example with wildcards:
 
-```php
+```
 stdClass Object
 (
     [str] => @username
@@ -137,7 +137,7 @@ There are two configuration methods: `set_method`, and `set_wildcards`.
 
 ---
 
-```php
+```
 function set_method($method)
 
 (string) $method : The default method if there is not one provided.
@@ -147,7 +147,7 @@ The default method is `to`.
 
 ---
 
-```php
+```
 function set_wildcards($wildcards)
 
 (array) $wildcards : The array of wildcards used in parsing.
